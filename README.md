@@ -2,14 +2,30 @@
 
 Este projeto tem como objetivo a criação de uma cabeça de robô interativo que entende mensagens escritas ou por voz e responde com base na personalidade de personagens famosos usando IA (inteligência artificial). O robô também expressa emoções com a voz e com movimentos físicos usando Arduino e servomotores.
 
-## 🧠 Objetivo
+## 🧠 Funcionamento
 
-Criar uma interface inteligente que:
-- Receba mensagens por **texto** ou **áudio**.
-- Interprete a mensagem assumindo a **personalidade de um personagem** (Romário, Trump, Xuxa ou Gaules) com IA.
-- Responda por **áudio sintetizado** com a voz do personagem.
-- Detecte a **emoção** na resposta (felicidade, raiva, tristeza, confusão).
-- Controle um robô físico com **servos** (via Arduino) para expressar emoções enquanto fala.
+- Interface gráfica desenvolvida com **Tkinter**.
+- Botões para selecionar o personagem que responderá: **Romário, Trump, Xuxa ou Gaules**.
+- Após a escolha do personagem:
+  - O usuário grava um áudio usando o microfone.
+  - O áudio é transcrito para texto com a **API Whisper do Google**.
+  - O texto é enviado para a **API Gemini**, que gera uma resposta baseada na personalidade escolhida.
+  - O texto da resposta é convertido em áudio com a **API da Cartesia**, com base no personagem escolhido.
+  - A resposta é analisada para identificar a **emoção predominante**:  
+    - Felicidade  
+    - Raiva  
+    - Tristeza  
+    - Confusão
+  - Durante a reprodução do áudio, a boca do robô se movimenta através de dois servos, de acordo com a **energia do som**, simulando a fala.
+  - A emoção é enviado via **serial para o Arduino**, que controla os **servomotores** responsáveis pela sombrancelha e olhos:
+
+### Tecnologias e APIs utilizadas:
+
+- Python + Tkinter (interface gráfica)
+- Google Whisper (transcrição de áudio)
+- Google Gemini (geração de resposta com base na personalidade)
+- Cartesia (conversão de texto em áudio)
+- Arduino + Servomotores (expressões faciais robóticas)
 
 ## 📦 Requisitos
 
@@ -40,6 +56,7 @@ pip install SpeechRecognition pyaudio soundfile Pillow
 - `cartesia.py`: Converte o texto de resposta para áudio com a voz do personagem.
 - `funcaoEnergia.py`: Analisa a energia do áudio para controlar a boca do robô.
 - `fala_com_arduino.py`: Envia comandos para o Arduino via porta serial.
+- `arduino-teste.ino`: controle dos servos do rosto robótico
 
 ## 🤖 Robô Físico
 
@@ -48,7 +65,3 @@ pip install SpeechRecognition pyaudio soundfile Pillow
   - 4 servos controlam a **expressão facial** (ex: sobrancelha) com base na emoção detectada.
       - sendo 2 dos servos para os olhos (olhar para esquerda e direita)
       - e os outros 2 para as sobrancelhas
-- Comandos são enviados em tempo real pela serial, como por exemplo:
-  ```
-  sobrancelha 2 0.7
-  ```
