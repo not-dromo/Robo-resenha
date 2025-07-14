@@ -65,3 +65,6 @@ pip install SpeechRecognition pyaudio soundfile Pillow
   - 4 servos controlam a **expressão facial** (ex: sobrancelha) com base na emoção detectada.
       - sendo 2 dos servos para os olhos (olhar para esquerda e direita)
       - e os outros 2 para as sobrancelhas
+
+
+<img width="2748" height="1488" alt="image" src="https://github.com/user-attachments/assets/2a2a4343-fdfa-477e-b6fe-1b7c25025efb" />
